@@ -1,0 +1,40 @@
+<ivy-module version="2.0">
+    <info organisation="org.apache" module="hello-ivy"/>
+	
+	<configurations>
+       	<conf name="build" visibility="private" description="Jars required to build/test app" />
+    	<conf name="runtime" description="Jar files required for runtime" />    	
+    </configurations>
+	
+    <dependencies>
+	    <dependency org="com.google.inject" name="guice" rev="3.0" conf="runtime->default"/>            
+		<dependency org="com.google.inject.extensions" name="guice-servlet" rev="3.0" conf="runtime->default"/>
+		
+		<dependency org="org.glassfish.jersey.containers" name="jersey-container-servlet" rev="2.7" conf="runtime->default"/>
+		<dependency org="org.glassfish.jersey.media" name="jersey-media-json-jackson" rev="2.7" conf="runtime->default"/>
+		<dependency org="org.codehaus.jackson" name="jackson-core-asl" rev="1.9.13" conf="runtime->default"/>
+		<dependency org="org.codehaus.jackson" name="jackson-jaxrs" rev="1.9.13" conf="runtime->default"/>
+		<dependency org="org.codehaus.jackson" name="jackson-mapper-asl" rev="1.9.13" conf="runtime->default"/>
+		<dependency org="org.codehaus.jackson" name="jackson-xc" rev="1.9.13" conf="runtime->default"/>
+		<dependency org="org.glassfish.hk2" name="guice-bridge" rev="2.2.0" conf="runtime->default"/>
+	    
+		<dependency org="commons-io" name="commons-io" rev="2.4" conf="runtime->default"/>
+		<dependency org="org.apache.commons" name="commons-lang3" rev="3.3.2" conf="runtime->default"/>
+		
+        <dependency org="org.slf4j" name="slf4j-api" rev="1.7.7" conf="runtime->default" />
+        <dependency org="org.slf4j" name="jcl-over-slf4j" rev="1.7.7" conf="runtime->default" />
+		<!--dependency org="org.slf4j" name="slf4j-log4j12" rev="1.7.7" conf="runtime->default" />		
+		<dependency org="log4j" name="log4j" rev="1.2.17" conf="runtime->default" /-->
+		<dependency org="org.slf4j" name="slf4j-simple" rev="1.7.7" conf="runtime->default" />
+		
+		<dependency org="org.hibernate" name="hibernate-core" rev="4.3.5.Final" conf="runtime->default" />
+		<dependency org="org.hibernate" name="hibernate-entitymanager" rev="4.3.5.Final" conf="runtime->default" />
+				
+		
+		<dependency org="junit" name="junit" rev="4.11" conf="build->default"/>
+		<dependency org="javax.servlet" name="servlet-api" rev="2.5" conf="build->default"/>
+            
+		
+		<exclude org="commons-logging"/>
+    </dependencies>
+</ivy-module>
