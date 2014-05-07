@@ -4,3 +4,13 @@
 
 body { padding-top: 70px; }
 
+.clickable{
+cursor:pointer;
+}
+
+a.hover-link{
+color:black;
+}
+
+
+

@@ -3,8 +3,10 @@ package com.rabidgremlin.onepagewebstarter.rest.resources;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
@@ -26,6 +28,15 @@ public class TodosResource {
 	public List<TodoDto> getTodos() {
 		
 		return todoDoa.getAll();
+	}
+	
+	
+	@DELETE
+	@Path("{todoId}")
+	public void deleteTodo(@PathParam("todoId") String todoId)
+	{
+		System.out.println("****************** Deleting:" + todoId);
+		todoDoa.deleteTodo(todoId);
 	}
 
 }

@@ -24,9 +24,23 @@ app.controller('TodoListCtrl', ['$scope','TodoService', function($scope,TodoServ
     	
 	$scope.todos = TodoService.query();
 		
+	$scope.toggleCompleted = function(todoId){
+		alert('Toogle completed: ' + todoId);
+	};	
+	
+	$scope.editTodo = function(todo){
+		alert('Edit Todo: ' + todo.id);
+	};
+	
+	$scope.deleteTodo = function(todo){
+		//alert('Delete Todo: ' + todo.id);
+		todo.$delete(function(){
+		  $scope.todos = TodoService.query();
+		});
+	};
 }]);
 
 
 app.factory('TodoService', ['$resource',  function($resource){
-    return $resource('/api/todos/:todoId');
+    return $resource('/api/todos/:todoId',{todoId:'@id'});
   }]);
