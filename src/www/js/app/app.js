@@ -1,4 +1,22 @@
-var app = angular.module('app',['ngResource']);
+var app = angular.module('app',['ngResource','ngRoute']);
+
+
+app.config(['$routeProvider',
+  function($routeProvider) {
+    $routeProvider.
+      when('/todos', {
+        templateUrl: 'todolistview.jsp'        
+      }).
+      when('/todos/edit/:todoId', {
+        templateUrl: 'todoeditview.jsp'        
+      }).
+      when('/todos/add', {
+        templateUrl: 'todoaddview.jsp'        
+      }).
+      otherwise({
+        redirectTo: '/todos'
+      });
+  }]);
 
 
 

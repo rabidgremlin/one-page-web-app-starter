@@ -23,7 +23,7 @@ public class TodoDoa {
 		todos.add(new TodoDto(UUID.randomUUID().toString(),
 				"Pick up dry cleaning", false, new DateTime().minusMinutes(12)));
 		todos.add(new TodoDto(UUID.randomUUID().toString(), "Put out trash",
-				false, new DateTime().minusMinutes(13)));
+				true, new DateTime().minusMinutes(13)));
 	}
 
 	public synchronized List<TodoDto> getAll() {
