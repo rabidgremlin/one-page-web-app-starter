@@ -1,21 +1,11 @@
-
 <web-app version="2.5" xmlns="http://java.sun.com/xml/ns/javaee"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
 
-	<servlet>
-		<servlet-name>MyApplication</servlet-name>
-		<servlet-class>org.glassfish.jersey.servlet.ServletContainer</servlet-class>
-		<init-param>
-			<param-name>javax.ws.rs.Application</param-name>
-			<param-value>com.rabidgremlin.onepagewebstarter.resources.MyApplication</param-value>
-		</init-param>
-		<load-on-startup>1</load-on-startup>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>MyApplication</servlet-name>
-		<url-pattern>/api/*</url-pattern>
-	</servlet-mapping>
+	<listener>
+		<listener-class>com.rabidgremlin.onepagewebstarter.guice.AppServletContextListener</listener-class>
+	</listener>
+
 
 	<filter>
 		<filter-name>guice-filter</filter-name>
@@ -27,8 +17,6 @@
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
 
-<!-- 	<listener>
-		<listener-class>example.jersey.Main</listener-class>
-	</listener>  -->
+
 
 </web-app>    

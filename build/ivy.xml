@@ -10,13 +10,13 @@
 	    <dependency org="com.google.inject" name="guice" rev="3.0" conf="runtime->default"/>            
 		<dependency org="com.google.inject.extensions" name="guice-servlet" rev="3.0" conf="runtime->default"/>
 		
-		<dependency org="org.glassfish.jersey.containers" name="jersey-container-servlet" rev="2.7" conf="runtime->default"/>
-		<dependency org="org.glassfish.jersey.media" name="jersey-media-json-jackson" rev="2.7" conf="runtime->default"/>
-		<dependency org="org.codehaus.jackson" name="jackson-core-asl" rev="1.9.13" conf="runtime->default"/>
-		<dependency org="org.codehaus.jackson" name="jackson-jaxrs" rev="1.9.13" conf="runtime->default"/>
-		<dependency org="org.codehaus.jackson" name="jackson-mapper-asl" rev="1.9.13" conf="runtime->default"/>
-		<dependency org="org.codehaus.jackson" name="jackson-xc" rev="1.9.13" conf="runtime->default"/>
-		<dependency org="org.glassfish.hk2" name="guice-bridge" rev="2.2.0" conf="runtime->default"/>
+		<dependency org="com.sun.jersey" name="jersey-core" rev="1.18.1" conf="runtime->default"/>
+		<dependency org="com.sun.jersey" name="jersey-server" rev="1.18.1" conf="runtime->default"/>
+		<dependency org="com.sun.jersey" name="jersey-servlet" rev="1.18.1" conf="runtime->default"/>
+		<dependency org="com.sun.jersey" name="jersey-json" rev="1.18.1" conf="runtime->default"/>		
+		<dependency org="com.sun.jersey.contribs" name="jersey-guice" rev="1.18.1" conf="runtime->default"/>
+        
+        <dependency org="joda-time" name="joda-time" rev="2.3" conf="runtime->default"/> 		
 	    
 		<dependency org="commons-io" name="commons-io" rev="2.4" conf="runtime->default"/>
 		<dependency org="org.apache.commons" name="commons-lang3" rev="3.3.2" conf="runtime->default"/>
