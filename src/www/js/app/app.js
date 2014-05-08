@@ -24,12 +24,20 @@ app.controller('TodoListCtrl', ['$scope','TodoService', function($scope,TodoServ
     	
 	$scope.todos = TodoService.query();
 		
-	$scope.toggleCompleted = function(todoId){
-		alert('Toogle completed: ' + todoId);
+	$scope.toggleCompleted = function(todo){
+		//alert('Toogle completed: ' + todoId);
+		
+		todo.completed = !todo.completed;
+		todo.$update(function(){
+		  $scope.todos = TodoService.query();
+		});
 	};	
 	
 	$scope.editTodo = function(todo){
-		alert('Edit Todo: ' + todo.id);
+		//alert('Edit Todo: ' + todo.id);
+		
+		
+		
 	};
 	
 	$scope.deleteTodo = function(todo){
@@ -40,7 +48,20 @@ app.controller('TodoListCtrl', ['$scope','TodoService', function($scope,TodoServ
 	};
 }]);
 
+app.controller('TodoAddCtrl', ['$scope','$location','TodoService', function($scope,$location,TodoService) {
+
+   $scope.description = '';
+
+   $scope.addTodo = function(){
+		TodoService.save({description:$scope.description},function(){
+			$location.path('/todos');
+		});
+	};
+
+}]);
+
+
 
 app.factory('TodoService', ['$resource',  function($resource){
-    return $resource('/api/todos/:todoId',{todoId:'@id'});
+    return $resource('/api/todos/:todoId',{todoId:'@id'}, {update: {method:'PUT'}})
   }]);
