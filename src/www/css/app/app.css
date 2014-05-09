@@ -1,16 +1,15 @@
-[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
-       display: none !important;
+[ng\:cloak],[ng-cloak],[data-ng-cloak],[x-ng-cloak],.ng-cloak,.x-ng-cloak {
+	display: none !important;
 }
 
-body { padding-top: 70px; }
-
-.clickable{
-cursor:pointer;
+body {
+	padding-top: 70px;
 }
 
-a.hover-link{
-color:black;
+.clickable {
+	cursor: pointer;
 }
 
-
-
+.completed {
+	text-decoration: line-through
+}

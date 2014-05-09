@@ -7,8 +7,8 @@
        
    <div class="panel panel-default" ng-repeat="todo in todos">
      <div class="panel-body" style="font-size:1.5em">
-        <span class="glyphicon glyphicon-remove text-danger pull-right clickable" ng-click="deleteTodo(todo)"></span><span class="glyphicon glyphicon-ok clickable" ng-class="{'text-success': todo.completed, 'text-muted': !todo.completed}" ng-click="toggleCompleted(todo)"></span>&nbsp;&nbsp;
-       <a href="#/todos/edit/{{todo.id}}" class="hover-link">{{todo.description}}</a>      
+        <span class="glyphicon glyphicon-trash text-danger pull-right clickable" ng-click="deleteTodo(todo)"></span><span class="glyphicon glyphicon-ok clickable" ng-class="{'text-success': todo.completed, 'text-muted': !todo.completed}" ng-click="toggleCompleted(todo)"></span>&nbsp;&nbsp;
+       <span class="clickable" ng-class="{'completed': todo.completed}" ng-click="editTodo(todo)">{{todo.description}}</span>      
      </div>
    </div>
 </div>       

@@ -18,60 +18,76 @@ import com.rabidgremlin.onepagewebstarter.rest.dto.TodoDto;
 import com.rabidgremlin.onepagewebstarter.rest.dto.TodoUpdateDto;
 
 @Path("todos")
-public class TodosResource {
+public class TodosResource
+{
 
-	private TodoDoa todoDoa;
+  private TodoDoa todoDoa;
 
-	@Inject
-	public TodosResource(TodoDoa todoDoa) {
-		this.todoDoa = todoDoa;
+  @Inject
+  public TodosResource(TodoDoa todoDoa)
+  {
+	this.todoDoa = todoDoa;
+  }
+
+  @GET
+  @Produces(MediaType.APPLICATION_JSON)
+  public List<TodoDto> getTodos()
+  {
+
+	return todoDoa.getAll();
+  }
+
+  
+  @GET
+  @Path("{todoId}")
+  public TodoDto getTodo(@PathParam("todoId") String todoId)
+  {
+	System.out.println("****************** Getting:" + todoId);
+	return todoDoa.getTodo(todoId);
+  }
+  
+  
+  @DELETE
+  @Path("{todoId}")
+  public void deleteTodo(@PathParam("todoId") String todoId)
+  {
+	System.out.println("****************** Deleting:" + todoId);
+	todoDoa.deleteTodo(todoId);
+  }
+
+  @PUT
+  @Path("{todoId}")
+  public void updateTodo(@PathParam("todoId") String todoId, TodoUpdateDto todoUpdate)
+  {
+	System.out.println("****************** Updating:" + todoId);
+
+	TodoDto todo = todoDoa.getTodo(todoId);
+
+	if (todoUpdate.getCompleted() != null)
+	{
+	  todo.setCompleted(todoUpdate.getCompleted());
 	}
 
-	@GET
-	@Produces(MediaType.APPLICATION_JSON)
-	public List<TodoDto> getTodos() {
-
-		return todoDoa.getAll();
+	if (todoUpdate.getDescription() != null)
+	{
+	  todo.setDescription(todoUpdate.getDescription());
 	}
 
-	@DELETE
-	@Path("{todoId}")
-	public void deleteTodo(@PathParam("todoId") String todoId) {
-		System.out.println("****************** Deleting:" + todoId);
-		todoDoa.deleteTodo(todoId);
-	}
+	todoDoa.saveTodo(todo);
+  }
 
-	@PUT
-	@Path("{todoId}")
-	public void updateTodo(@PathParam("todoId") String todoId,
-			TodoUpdateDto todoUpdate) {
-		System.out.println("****************** Updating:" + todoId);
+  @POST
+  public void updateTodo(TodoCreateDto todoCreate)
+  {
+	System.out.println("****************** Creating:" + todoCreate);
 
-		TodoDto todo = todoDoa.getTodo(todoId);
+	TodoDto todo = new TodoDto();
+	todo.setCompleted(false);
+	todo.setDescription(todoCreate.getDescription());
 
-		if (todoUpdate.getCompleted() != null) {
-			todo.setCompleted(todoUpdate.getCompleted());
-		}
+	todoDoa.saveTodo(todo);
 
-		if (todoUpdate.getDescription() != null) {
-			todo.setDescription(todoUpdate.getDescription());
-		}
-		
-		todoDoa.saveTodo(todo);
-	}
-	
-	@POST	
-	public void updateTodo(
-			TodoCreateDto todoCreate) {
-		System.out.println("****************** Creating:" + todoCreate);
-
-		TodoDto todo = new TodoDto();
-		todo.setCompleted(false);
-		todo.setDescription(todoCreate.getDescription());
-		
-		todoDoa.saveTodo(todo);
-		
-		//todo return 201
-	}
+	// todo return 201
+  }
 
 }
