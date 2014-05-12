@@ -9,5 +9,10 @@ src/www/WEB-INF/lib/*.jar
 *.war
 *.ear
 
+# build artifacts
+classes/*
+tmp/*
+release/*
+
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*

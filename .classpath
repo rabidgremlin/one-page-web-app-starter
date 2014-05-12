@@ -44,5 +44,11 @@
 	<classpathentry kind="lib" path="src/www/WEB-INF/lib/jersey-core-1.18.1.jar"/>
 	<classpathentry kind="lib" path="src/www/WEB-INF/lib/jersey-servlet-1.18.1.jar"/>
 	<classpathentry kind="lib" path="src/www/WEB-INF/lib/joda-time-2.3.jar"/>
+	<classpathentry kind="lib" path="src/www/WEB-INF/lib/mysql-connector-java-5.1.30.jar"/>
+	<classpathentry kind="lib" path="src/www/WEB-INF/lib/guice-persist-3.0.jar"/>
+	<classpathentry kind="lib" path="src/www/WEB-INF/lib/commons-beanutils-1.9.1.jar"/>
+	<classpathentry kind="lib" path="src/www/WEB-INF/lib/commons-collections-3.2.1.jar"/>
+	<classpathentry kind="lib" path="src/www/WEB-INF/lib/usertype.core-3.2.0.GA.jar"/>
+	<classpathentry kind="lib" path="src/www/WEB-INF/lib/usertype.spi-3.2.0.GA.jar"/>
 	<classpathentry kind="output" path="classes"/>
 </classpath>

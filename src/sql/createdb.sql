@@ -4,7 +4,7 @@ SET time_zone = "+00:00";
 DROP DATABASE IF EXISTS onepagestarter;
 CREATE DATABASE onepagestarter; 
 
-GRANT ALL ON onepagestarter.* TO onepagestarter@'%' IDENTIFIED BY 'password123';
+GRANT ALL ON onepagestarter.* TO onepagestarter@'localhost' IDENTIFIED BY 'password123';
 
 USE onepagestarter;
 
