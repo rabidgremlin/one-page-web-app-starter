@@ -30,6 +30,7 @@ public class TodosResource {
 
 	@Inject
 	public TodosResource(TodoDoa todoDoa) {
+		System.out.println("Created TodosResource..doa:" + todoDoa);
 		this.todoDoa = todoDoa;
 	}
 

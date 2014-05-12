@@ -13,7 +13,7 @@ public class TodoDoa {
 
 	@Inject
 	public TodoDoa(EntityManager em) {
-		System.out.println("Created DOA");
+		System.out.println("Created DOA. em:" + em);
 		this.em = em;
 	}
 
