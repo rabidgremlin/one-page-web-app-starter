@@ -17,14 +17,23 @@ app.config([ '$routeProvider', function($routeProvider) {
 app.controller('TodoListCtrl', [ '$scope', '$location', 'TodoService',
 		function($scope, $location, TodoService) {
 
-			$scope.todos = TodoService.query();
+	
+	        // use a function here so that scope can be set to actual data not to the promise that query() returns
+	        // this allows the track by on the ng-repeat in todolistview.jsp to function which reduces flicker
+			function queryTodos() {
+				TodoService.query(function(data){
+					$scope.todos = data;
+				});
+			}
+			
+			queryTodos();
 
 			$scope.toggleCompleted = function(todo) {
 				// alert('Toogle completed: ' + todoId);
 
 				todo.completed = !todo.completed;
 				todo.$update(function() {
-					$scope.todos = TodoService.query();
+					queryTodos();
 				});
 			};
 
@@ -35,7 +44,7 @@ app.controller('TodoListCtrl', [ '$scope', '$location', 'TodoService',
 			$scope.deleteTodo = function(todo) {
 				// alert('Delete Todo: ' + todo.id);
 				todo.$delete(function() {
-					$scope.todos = TodoService.query();
+					queryTodos();
 				});
 			};
 		} ]);
