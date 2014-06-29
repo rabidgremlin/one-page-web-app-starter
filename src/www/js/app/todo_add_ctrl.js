@@ -14,41 +14,17 @@
   See the License for the specific language governing permissions and
   limitations under the License.
  */
-package com.rabidgremlin.onepagewebstarter.rest.dto;
+app.controller('TodoAddCtrl', [ '$scope', '$location', 'TodoService',
+		function($scope, $location, TodoService) {
 
-import org.codehaus.jackson.annotate.JsonIgnoreProperties;
+			$scope.description = '';
 
-@JsonIgnoreProperties(ignoreUnknown = true)
-public class TodoUpdateDto
-{
+			$scope.addTodo = function() {
+				TodoService.save({
+					description : $scope.description
+				}, function() {
+					$location.path('/todos');
+				});
+			};
 
-  private String description;
-  private Boolean completed;
-
-  public String getDescription()
-  {
-	return description;
-  }
-
-  public void setDescription(String description)
-  {
-	this.description = description;
-  }
-
-  public Boolean getCompleted()
-  {
-	return completed;
-  }
-
-  public void setCompleted(Boolean completed)
-  {
-	this.completed = completed;
-  }
-
-  @Override
-  public String toString()
-  {
-	return "TodoUpdateDto [description=" + description + ", completed=" + completed + "]";
-  }
-
-}
+		} ]);
