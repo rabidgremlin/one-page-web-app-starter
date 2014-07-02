@@ -24,7 +24,7 @@ import javax.persistence.Version;
 
 import org.joda.time.DateTime;
 
-// TODO lok at using NamedQueries http://stackoverflow.com/questions/9793252/selecting-all-rows-from-a-database-using-jpa-in-websphere
+// TODO look at using NamedQueries http://stackoverflow.com/questions/9793252/selecting-all-rows-from-a-database-using-jpa-in-websphere
 
 @Entity
 @Table(name = "todo")
@@ -44,14 +44,9 @@ public class Todo
   @Version
   private DateTime lastDateTimeModified;
 
-  public String getId()
+  public Boolean getCompleted()
   {
-	return id;
-  }
-
-  public void setId(String id)
-  {
-	this.id = id;
+	return completed;
   }
 
   public String getDescription()
@@ -59,14 +54,14 @@ public class Todo
 	return description;
   }
 
-  public void setDescription(String description)
+  public String getId()
   {
-	this.description = description;
+	return id;
   }
 
-  public Boolean getCompleted()
+  public DateTime getLastDateTimeModified()
   {
-	return completed;
+	return lastDateTimeModified;
   }
 
   public void setCompleted(Boolean completed)
@@ -74,9 +69,14 @@ public class Todo
 	this.completed = completed;
   }
 
-  public DateTime getLastDateTimeModified()
+  public void setDescription(String description)
   {
-	return lastDateTimeModified;
+	this.description = description;
+  }
+
+  public void setId(String id)
+  {
+	this.id = id;
   }
 
   public void setLastDateTimeModified(DateTime lastDateTimeModified)

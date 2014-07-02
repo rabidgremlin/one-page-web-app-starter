@@ -37,22 +37,6 @@ public class CxfGuiceServlet extends CXFNonSpringJaxrsServlet
 {
 
   @Override
-  protected Map<Class<?>, ResourceProvider> getResourceProviders(ServletConfig servletConfig,
-	  Map<Class<?>, Map<String, List<String>>> resourceClasses) throws ServletException
-  {
-	Injector injector = (Injector) servletConfig.getServletContext().getAttribute(Injector.class.getName());
-
-	Map<Class<?>, ResourceProvider> providers = new HashMap<Class<?>, ResourceProvider>();
-	for (Map.Entry<Class<?>, Map<String, List<String>>> entry : resourceClasses.entrySet())
-	{
-	  Class<?> cls = entry.getKey();
-	  providers.put(cls, new SingletonResourceProvider(injector.getInstance(cls)));
-	}
-
-	return providers;
-  }
-
-  @Override
   protected List<Object> getProviders(ServletConfig servletConfig, String splitChar) throws ServletException
   {
 	List<Object> providers = new ArrayList<Object>();
@@ -70,6 +54,22 @@ public class CxfGuiceServlet extends CXFNonSpringJaxrsServlet
 	{
 	  Class<?> cls = loadClass(StringUtils.strip(cName));
 	  providers.add(injector.getInstance(cls));
+	}
+
+	return providers;
+  }
+
+  @Override
+  protected Map<Class<?>, ResourceProvider> getResourceProviders(ServletConfig servletConfig,
+	  Map<Class<?>, Map<String, List<String>>> resourceClasses) throws ServletException
+  {
+	Injector injector = (Injector) servletConfig.getServletContext().getAttribute(Injector.class.getName());
+
+	Map<Class<?>, ResourceProvider> providers = new HashMap<Class<?>, ResourceProvider>();
+	for (Map.Entry<Class<?>, Map<String, List<String>>> entry : resourceClasses.entrySet())
+	{
+	  Class<?> cls = entry.getKey();
+	  providers.put(cls, new SingletonResourceProvider(injector.getInstance(cls)));
 	}
 
 	return providers;

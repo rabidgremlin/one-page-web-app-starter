@@ -53,6 +53,24 @@ public class TodosResource
   }
 
   @Transactional
+  @DELETE
+  @Path("{todoId}")
+  public void deleteTodo(@PathParam("todoId") String todoId)
+  {
+	System.out.println("****************** Deleting:" + todoId);
+	todoDoa.deleteTodo(todoId);
+  }
+
+  @Transactional
+  @GET
+  @Path("{todoId}")
+  public TodoDto getTodo(@PathParam("todoId") String todoId)
+  {
+	System.out.println("****************** Getting:" + todoId);
+	return makeDto(todoDoa.getTodo(todoId));
+  }
+
+  @Transactional
   @GET
   @Produces(MediaType.APPLICATION_JSON)
   public List<TodoDto> getTodos()
@@ -93,24 +111,6 @@ public class TodosResource
 	  e.printStackTrace();
 	}
 	return temp;
-  }
-
-  @Transactional
-  @GET
-  @Path("{todoId}")
-  public TodoDto getTodo(@PathParam("todoId") String todoId)
-  {
-	System.out.println("****************** Getting:" + todoId);
-	return makeDto(todoDoa.getTodo(todoId));
-  }
-
-  @Transactional
-  @DELETE
-  @Path("{todoId}")
-  public void deleteTodo(@PathParam("todoId") String todoId)
-  {
-	System.out.println("****************** Deleting:" + todoId);
-	todoDoa.deleteTodo(todoId);
   }
 
   @Transactional

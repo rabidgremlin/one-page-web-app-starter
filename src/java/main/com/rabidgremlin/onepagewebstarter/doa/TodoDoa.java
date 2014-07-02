@@ -37,9 +37,11 @@ public class TodoDoa
 	this.emProvider = emProvider;
   }
 
-  private EntityManager getEntityManager()
+  public boolean deleteTodo(String id)
   {
-	return emProvider.get();
+	getEntityManager().remove(getTodo(id));
+
+	return true;
   }
 
   public List<Todo> getAll()
@@ -47,17 +49,15 @@ public class TodoDoa
 	return getEntityManager().createQuery("SELECT t FROM Todo t", Todo.class).getResultList();
   }
 
+  private EntityManager getEntityManager()
+  {
+	return emProvider.get();
+  }
+
   public Todo getTodo(String id)
   {
 
 	return getEntityManager().find(Todo.class, id);
-  }
-
-  public boolean deleteTodo(String id)
-  {
-	getEntityManager().remove(getTodo(id));
-
-	return true;
   }
 
   public void saveTodo(Todo todo)
