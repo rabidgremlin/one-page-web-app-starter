@@ -5,8 +5,7 @@
 	<listener>
 		<listener-class>com.rabidgremlin.onepagewebstarter.guice.AppServletContextListener</listener-class>
 	</listener>
-
-
+	
 	<filter>
 		<filter-name>guice-filter</filter-name>
 		<filter-class>com.google.inject.servlet.GuiceFilter</filter-class>
@@ -16,7 +15,5 @@
 		<filter-name>guice-filter</filter-name>
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
-
-
 
 </web-app>    

@@ -70,5 +70,6 @@
 	<classpathentry kind="lib" path="src/www/WEB-INF/lib/xmlschema-core-2.1.0.jar"/>
 	<classpathentry kind="lib" path="src/www/WEB-INF/lib/xmlsec-1.5.6.jar"/>
 	<classpathentry kind="lib" path="src/www/WEB-INF/lib/xmltooling-1.4.1.jar"/>
+	<classpathentry kind="lib" path="src/www/WEB-INF/lib/packtag-3.10.jar"/>
 	<classpathentry kind="output" path="classes"/>
 </classpath>

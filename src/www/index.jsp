@@ -1,5 +1,5 @@
-<%@ taglib uri="http://packtag.sf.net" prefix="pack" %><%--
- --%><!DOCTYPE html>
+<%@ taglib uri="http://packtag.sf.net" prefix="pack" %>
+<!DOCTYPE html>
 <html lang="en" ng-app="app">
   <head>
     <meta charset="utf-8">
@@ -49,11 +49,11 @@
    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.16/angular-route.min.js"></script>
    
    <pack:script>
-     <src>/js/app/app.js"></src>
-     <src>/js/app/todo_service.js"></src>
-     <src>/js/app/todo_add_ctrl.js"></src>
-     <src>/js/app/todo_edit_ctrl.js"></src>
-     <src>/js/app/todo_list_ctrl.js"></src>
+     <src>/js/app/app.js</src>
+     <src>/js/app/todo_service.js</src>
+     <src>/js/app/todo_add_ctrl.js</src>
+     <src>/js/app/todo_edit_ctrl.js</src>
+     <src>/js/app/todo_list_ctrl.js</src>
    </pack:script>  
   </body>
 </html>

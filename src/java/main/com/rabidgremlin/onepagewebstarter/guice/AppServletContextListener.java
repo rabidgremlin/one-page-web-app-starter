@@ -21,6 +21,7 @@ import java.util.Map;
 
 import com.google.inject.Guice;
 import com.google.inject.Injector;
+import com.google.inject.Singleton;
 import com.google.inject.persist.PersistFilter;
 import com.google.inject.persist.jpa.JpaPersistModule;
 import com.google.inject.servlet.GuiceServletContextListener;
@@ -67,6 +68,10 @@ public class AppServletContextListener extends GuiceServletContextListener
 		serve("/api/*").with(CxfGuiceServlet.class, params);
 
 		filter("/api/*").through(PersistFilter.class);
+		
+		
+		bind(net.sf.packtag.servlet.PackServlet.class).in(Singleton.class);
+		serve("*.pack").with(net.sf.packtag.servlet.PackServlet.class);
 	  }
 	});
   }
