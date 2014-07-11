@@ -1,0 +1,66 @@
+<?xml version="1.0"?>
+
+<!-- build .xml for jar sub-task -->
+<project name="Jar" default="jar-main" basedir=".">
+
+	<target name="jar-main">
+		<!--  build the .war file -->
+		<property name="tmpWarDir" value="${tmp.dir}/war" />
+		<mkdir dir="${tmpWarDir}" />
+
+		<!-- copy the www tree skipping about.jsp -->
+		<copy todir="${tmpWarDir}">
+			<fileset dir="${www.dir}">
+				<include name="**/*" />	 
+				<exclude name="about.jsp" /> 								
+			</fileset>
+		</copy>
+
+		<!-- copy about.jsp and fill in build data -->
+		<copy todir="${tmpWarDir}">
+			<fileset dir="${www.dir}">
+				<include name="about.jsp" />				
+			</fileset>
+			<filterset>
+				<filter token="name" value="${name}"/>
+				<filter token="rel" value="${rel}"/>
+				<filter token="label" value="${label}"/>
+				<filter token="cctimestamp" value="${cctimestamp}"/>
+				<filter token="computername" value="${env.COMPUTERNAME}"/>
+				<filter token="username" value="${user.name}"/>
+			</filterset>			
+		</copy>
+
+		<!-- delete any .class files created by IDE -->
+		<delete dir="${tmpWarDir}/WEB-INF/classes" />
+
+		<!-- Copy Ant compiled classes and any .properties,.xml files from source tree -->
+		<copy todir="${tmpWarDir}/WEB-INF/classes">
+			<fileset dir="${class.dir}">
+				<include name="**/*" />
+			</fileset>
+			<fileset dir="${java.dir}">
+				<include name="**/*.xml" />
+				<include name="**/*.properties" />
+			</fileset>
+		</copy>
+
+		<!-- create the .war file -->
+		<jar jarfile="${tmp.dir}/${name}.war" basedir="${tmpWarDir}">
+			<manifest>
+				<attribute name="Comment"
+					value="Built on ${cctimestamp} by ${env.COMPUTERNAME}-${user.name}" />
+				<attribute name="Implementation-Title" value="${name}" />
+				<attribute name="Implementation-Version" value="${rel}" />
+				<attribute name="Implementation-Vendor" value="${vendor}" />
+			</manifest>
+		</jar> 
+
+	</target>
+
+
+
+
+</project>
+
+

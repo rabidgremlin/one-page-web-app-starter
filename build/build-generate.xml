@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+
+<!-- build .xml for test sub task -->
+<project name="Generate" default="generate-main" basedir=".">
+	<target name="generate-main">
+    
+    <!-- Nothing to generate... move along  -->
+
+	</target>
+</project>

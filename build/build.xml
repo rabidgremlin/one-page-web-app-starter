@@ -1,26 +1,173 @@
+<?xml version="1.0"?>
+
+<project xmlns:ivy="antlib:org.apache.ivy.ant" name="one-page-web-starter-app" default="main">
+
+	<property name="name" value="opwas" />
+	<property name="rel" value="1-0-0" />
+	<property name="vendor" value="Rabidgremlin Ltd" />
+	<property name="target-jdk" value="1.7" />
+
+	<echo message="=====================================================" />
+	<echo message="=== Build File for ${name} Release ${rel}" />
+	<echo message="=====================================================" />
+
+	<!-- load in environment/user specific properties -->
+	<property environment="env" />
+	<property name="env.COMPUTERNAME" value="${env.HOSTNAME}" />
+	<property name="project.properties.file" value="${env.COMPUTERNAME}_${user.name}_project.properties" />
+	<available file="${project.properties.file}" property="project-properties-present" />
+	<property file="${project.properties.file}" />
+	
+	<!-- set up path properties -->
+	<property name="build.dir" value="../build" />
+    <property name="src.dir" value="../src" />
+    <property name="lib.dir" value="../lib" />
+    <property name="java.dir" value="${src.dir}/java/main" />
+    <property name="meta.dir" value="${src.dir}/meta" />
+    <property name="test.java.dir" value="${src.dir}/java/test" />
+    <property name="www.dir" value="${src.dir}/www" />
+    <property name="www.lib.dir" value="${www.dir}/WEB-INF/lib" />
+    <property name="xsd.dir" value="${src.dir}/xsd" />
+    <property name="doc.dir" value="${src.dir}/doc" />
+    <property name="etc.dir" value="${src.dir}/etc" />
+    <property name="sql.dir" value="${src.dir}/sql" />
+    <property name="class.dir" value="../classes" />
+    <property name="test.class.dir" value="../testclasses" />
+    <property name="tmp.dir" value="../tmp" />
+    <property name="javadoc.dir" value="../javadoc" />
+    <property name="rel.dir" value="../release" />
+    <property name="javadoc.packagenames" value="com" />
+
+	<!-- main target prints out options -->
+	<target name="main">
+		<echo message="Targets are:" />
+		<echo message="" />
+		<echo message="  clean    - Cleans project for fresh build" />
+		<echo message="  compile  - Compiles all code" />
+		<echo message="  jar      - Creates all jar files for the system" />
+		<echo message="  deploy   - Deploys files to locations for testing" />
+		<echo message="  release  - Builds a release of the system" />
+		<echo message="  javadoc  - Builds the javadoc for the system" />
+		<echo message="  report   - runs any style checks and metrics reports" />
+		<echo message="  test     - run the JUnit tests" />
+	</target>
 
 
-<project xmlns:ivy="antlib:org.apache.ivy.ant" name="testivy" default="go">
+	<!-- used to fail in environment/project specific properties file is not present -->
+	<target name="project-properties-check" unless="project-properties-present">
+		<fail message="ERROR: No project properties file found ! Looking for ${project.properties.file}" />
+	</target>
 
-<property name="lib.dir" value="../lib"/>
-<property name="src.dir" value="../src"/>
-<property name="java.dir" value="${src.dir}/java/main"/>
-<property name="www.dir" value="${src.dir}/www"/>
-<property name="www.lib.dir" value="${www.dir}/WEB-INF/lib"/>
+    <!-- use Ivy to pull down dependencies from the web --> 
+	<target name="get-deps">
+		<path id="ivy.lib.path">
+			<fileset file="./ivy-2.4.0-rc1.jar"/>
+		</path>
 
-<target name="init-ivy">
-   <path id="ivy.lib.path">
-      <fileset file="./ivy-2.4.0-rc1.jar"/>
-   </path>
+		<taskdef resource="org/apache/ivy/ant/antlib.xml"  uri="antlib:org.apache.ivy.ant" classpathref="ivy.lib.path"/>
 
-   <taskdef resource="org/apache/ivy/ant/antlib.xml"  uri="antlib:org.apache.ivy.ant" classpathref="ivy.lib.path"/>
-</target>
+		<ivy:resolve/>
 
-<target name="go" depends="init-ivy">
-  <ivy:resolve/>
-  
-  <ivy:retrieve pattern="${lib.dir}/[artifact]-[revision].[ext]" conf="build" sync="true"/>
-  <ivy:retrieve pattern="${www.lib.dir}/[artifact]-[revision].[ext]" conf="runtime" sync="true"/>
-</target>
+		<ivy:retrieve pattern="${lib.dir}/[artifact]-[revision].[ext]" conf="build" sync="true"/>
+		<ivy:retrieve pattern="${www.lib.dir}/[artifact]-[revision].[ext]" conf="runtime" sync="true"/>
+	</target>
+
+
+	<!-- prints out environment and checks that project properties file is present -->
+	<target name="init" depends="project-properties-check,get-deps">
+		<echo message="   JVM      : ${java.vm.info}" />
+		<echo message="   Version  : ${java.vm.version}" />
+		<echo message="   Java Home: ${java.home}" />
+		<tstamp />
+	</target>
+
+
+	<!-- cleans up all the tmp and generated source dirs -->
+	<target name="clean">
+		<delete dir="${tmp.dir}" />
+		<delete dir="${rel.dir}" />
+		<delete dir="${class.dir}" />
+		<delete dir="${test.class.dir}" />
+		<delete dir="${javadoc.dir}" />
+	</target>
+
+
+	<!-- compiles all the .jar files in the source tree -->
+	<target name="compile" depends="init">
+		<mkdir dir="${class.dir}" />
+		<mkdir dir="${test.class.dir}" />
+
+		<path id="compile.classpath">
+			<fileset dir="${www.lib.dir}">
+				<include name="*.jar" />
+			</fileset>
+			<fileset dir="${lib.dir}">
+				<include name="*.jar" />
+			</fileset>
+		</path>
+
+		<javac includeantruntime="false" source="${target-jdk}" target="${target-jdk}" destdir="${class.dir}" classpathref="compile.classpath" debug="true">
+			<src path="${java.dir}:${java.dir}" />
+			<include name="**/*.java" />
+		</javac>
+
+		<javac includeantruntime="false" source="${target-jdk}" target="${target-jdk}" destdir="${test.class.dir}" classpathref="compile.classpath" debug="true">
+			<src path="${java.dir}:${test.java.dir}" />
+			<include name="**/*.java" />
+		</javac>
+	</target>
+
+	<!-- the generate target see build-generate.xml -->
+	<target name="generate">
+		<ant antfile="build-generate.xml" />
+	</target>
+
+	<!-- the test target see build-test.xml -->
+	<target name="test" depends="compile">
+		<ant antfile="build-test.xml" />
+	</target>
+
+	<!-- the jar target see build-jar.xml -->
+	<target name="jar" depends="compile">
+		<mkdir dir="${tmp.dir}" />
+		<ant antfile="build-jar.xml" />
+	</target>
+
+
+	<!-- the release target see build-release.xml  -->
+	<target name="release" depends="clean,generate,compile,jar,test">
+		<ant antfile="build-release.xml" />
+	</target>
+
+
+	<!-- creates javadoc for the files in the source tree. only does packages listed in ${javadoc.packagenames} -->
+	<target name="javadoc" depends="compile">
+		<delete dir="${javadoc.dir}" />
+		<mkdir dir="${javadoc.dir}" />
+
+		<path id="javadoc.classpath">
+			<fileset dir="${www.lib.dir}">
+				<include name="*.jar" />
+			</fileset>
+			<fileset dir="${lib.dir}">
+				<include name="*.jar" />
+			</fileset>
+		</path>
+
+		<javadoc packagenames="${javadoc.packagenames}" classpathref="javadoc.classpath" destdir="${javadoc.dir}" author="true" version="true" private="true" doctitle="${name} JavaDoc (release ${rel})" windowtitle="${name} JavaDoc (release ${rel})">
+			<header>${name} ${rel}</header>
+			<footer>${name} ${rel}</footer>
+			<fileset dir="${java.dir}">
+				<include name="**/*.java" />
+			</fileset>
+		</javadoc>
+	</target>
+
+	<!-- the report target see build-report.xml -->
+	<target name="report" depends="init">
+		<ant antfile="build-report.xml" />
+	</target>
+
+
 
 </project>

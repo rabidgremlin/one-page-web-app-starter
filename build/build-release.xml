@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+
+<!-- build .xml for release sub-task-->
+
+<project name="Release" default="release-main" basedir=".">
+
+	
+    <target name="release-main">
+    
+        <delete dir="${rel.dir}" />
+		<mkdir dir="${rel.dir}" />
+        <mkdir dir="${rel.dir}/files" />
+		
+		<copy todir="${rel.dir}/files">
+			<fileset dir="${tmp.dir}">
+				<include name="${name}.war" />
+			</fileset>			
+		</copy> 
+		
+		<copy todir="${rel.dir}/files/etc">
+			<fileset dir="${etc.dir}">
+				<include name="**/*" />
+			</fileset>			
+		</copy>
+		
+		<copy todir="${rel.dir}/files/sql">
+			<fileset dir="${sql.dir}">
+				<include name="**/*" />
+			</fileset>			
+		</copy>
+    
+    	<zip zipfile="${rel.dir}/${name}-${rel}-${label}-${cctimestamp}.zip"
+			basedir="${rel.dir}/files" />
+
+		<echo>Release built see: ${rel.dir}/${name}-${rel}-${label}-${cctimestamp}.zip</echo>
+       
+	
+
+	</target>
+
+</project>

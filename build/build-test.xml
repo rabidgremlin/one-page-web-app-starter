@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+
+<!-- build .xml for test sub task -->
+<project name="Test" default="test-main" basedir=".">   
+    <target name="test-main">
+        
+    </target>
+</project>

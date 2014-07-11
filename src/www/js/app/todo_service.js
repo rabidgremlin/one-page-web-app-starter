@@ -15,7 +15,7 @@
   limitations under the License.
  */
 app.factory('TodoService', [ '$resource', function($resource) {
-	return $resource('/api/todos/:todoId', {
+	return $resource('api/todos/:todoId', {
 		todoId : '@id'
 	}, {
 		update : {
