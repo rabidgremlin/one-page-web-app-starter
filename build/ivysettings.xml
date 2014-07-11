@@ -24,7 +24,15 @@
 	<include url="${ivy.default.settings.dir}/ivysettings-main-chain.xml"/>
 	<include url="${ivy.default.settings.dir}/ivysettings-default-chain.xml"/>
 	
-	 <resolvers>    
-    	<ibiblio name="github-galan-repository" m2compatible="true" root="https://raw.github.com/galan/maven-repository/master/releases"></ibiblio>
-   </resolvers>
+	<!-- this pattern from http://stackoverflow.com/questions/10175000/sample-example-which-explain-how-to-use-filesystem-resolver -->
+	<resolvers>    
+    	<filesystem name="local">
+			<artifact pattern="${ivy.settings.dir}/lib/[artifact]-[revision].[ext]"/>
+        </filesystem>
+	</resolvers>
+   
+    <!-- Packtags no in main repos and their one on github is broken -->
+    <modules>
+		<module organisation="de.galan.packtag" resolver="local"/>        
+    </modules>
 </ivysettings>

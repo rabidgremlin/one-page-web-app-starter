@@ -51,7 +51,7 @@
 		   <exclude org="junit"/>
 		</dependency>
 		
-		<dependency org="de.galan.packtag" name="packtag-core" rev="3.10" conf="runtime->default" />		
+		<dependency org="de.galan.packtag" name="packtag" rev="3.10" conf="runtime->default" />		
             
 		<dependency org="mysql" name="mysql-connector-java" rev="5.1.30" conf="runtime->default"/>
 				
