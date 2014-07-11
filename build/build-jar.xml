@@ -23,11 +23,8 @@
 			</fileset>
 			<filterset>
 				<filter token="name" value="${name}"/>
-				<filter token="rel" value="${rel}"/>
-				<filter token="label" value="${label}"/>
-				<filter token="cctimestamp" value="${cctimestamp}"/>
-				<filter token="computername" value="${env.COMPUTERNAME}"/>
-				<filter token="username" value="${user.name}"/>
+				<filter token="rel" value="${rel}"/>				
+				<filter token="buildlabel" value="${buildlabel}"/>				
 			</filterset>			
 		</copy>
 
@@ -49,7 +46,7 @@
 		<jar jarfile="${tmp.dir}/${name}.war" basedir="${tmpWarDir}">
 			<manifest>
 				<attribute name="Comment"
-					value="Built on ${cctimestamp} by ${env.COMPUTERNAME}-${user.name}" />
+					value="Build: ${buildlabel}" />
 				<attribute name="Implementation-Title" value="${name}" />
 				<attribute name="Implementation-Version" value="${rel}" />
 				<attribute name="Implementation-Vendor" value="${vendor}" />

@@ -29,10 +29,10 @@
 			</fileset>			
 		</copy>
     
-    	<zip zipfile="${rel.dir}/${name}-${rel}-${label}-${cctimestamp}.zip"
+    	<zip zipfile="${rel.dir}/${name}-${rel}-${buildlabel}.zip"
 			basedir="${rel.dir}/files" />
 
-		<echo>Release built see: ${rel.dir}/${name}-${rel}-${label}-${cctimestamp}.zip</echo>
+		<echo>Release built see: ${rel.dir}/${name}-${rel}-${buildlabel}.zip</echo>
        
 	
 

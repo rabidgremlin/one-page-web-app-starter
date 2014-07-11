@@ -17,26 +17,26 @@
 	<property name="project.properties.file" value="${env.COMPUTERNAME}_${user.name}_project.properties" />
 	<available file="${project.properties.file}" property="project-properties-present" />
 	<property file="${project.properties.file}" />
-	
+
 	<!-- set up path properties -->
 	<property name="build.dir" value="../build" />
-    <property name="src.dir" value="../src" />
-    <property name="lib.dir" value="../lib" />
-    <property name="java.dir" value="${src.dir}/java/main" />
-    <property name="meta.dir" value="${src.dir}/meta" />
-    <property name="test.java.dir" value="${src.dir}/java/test" />
-    <property name="www.dir" value="${src.dir}/www" />
-    <property name="www.lib.dir" value="${www.dir}/WEB-INF/lib" />
-    <property name="xsd.dir" value="${src.dir}/xsd" />
-    <property name="doc.dir" value="${src.dir}/doc" />
-    <property name="etc.dir" value="${src.dir}/etc" />
-    <property name="sql.dir" value="${src.dir}/sql" />
-    <property name="class.dir" value="../classes" />
-    <property name="test.class.dir" value="../testclasses" />
-    <property name="tmp.dir" value="../tmp" />
-    <property name="javadoc.dir" value="../javadoc" />
-    <property name="rel.dir" value="../release" />
-    <property name="javadoc.packagenames" value="com" />
+	<property name="src.dir" value="../src" />
+	<property name="lib.dir" value="../lib" />
+	<property name="java.dir" value="${src.dir}/java/main" />
+	<property name="meta.dir" value="${src.dir}/meta" />
+	<property name="test.java.dir" value="${src.dir}/java/test" />
+	<property name="www.dir" value="${src.dir}/www" />
+	<property name="www.lib.dir" value="${www.dir}/WEB-INF/lib" />
+	<property name="xsd.dir" value="${src.dir}/xsd" />
+	<property name="doc.dir" value="${src.dir}/doc" />
+	<property name="etc.dir" value="${src.dir}/etc" />
+	<property name="sql.dir" value="${src.dir}/sql" />
+	<property name="class.dir" value="../classes" />
+	<property name="test.class.dir" value="../testclasses" />
+	<property name="tmp.dir" value="../tmp" />
+	<property name="javadoc.dir" value="../javadoc" />
+	<property name="rel.dir" value="../release" />
+	<property name="javadoc.packagenames" value="com" />
 
 	<!-- main target prints out options -->
 	<target name="main">
@@ -58,7 +58,7 @@
 		<fail message="ERROR: No project properties file found ! Looking for ${project.properties.file}" />
 	</target>
 
-    <!-- use Ivy to pull down dependencies from the web --> 
+	<!-- use Ivy to pull down dependencies from the web --> 
 	<target name="get-deps">
 		<path id="ivy.lib.path">
 			<fileset file="./ivy-2.4.0-rc1.jar"/>
@@ -79,6 +79,9 @@
 		<echo message="   Version  : ${java.vm.version}" />
 		<echo message="   Java Home: ${java.home}" />
 		<tstamp />
+
+		<!-- create buildlabel. Will only be set if not already set by say CI passing in value to Ant -->
+		<property name="buildlabel" value="${env.COMPUTERNAME}_${user.name}_${DSTAMP}_${TSTAMP}" />
 	</target>
 
 
