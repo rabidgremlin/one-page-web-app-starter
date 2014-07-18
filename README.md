@@ -13,16 +13,16 @@ A "starter" project for building a one-page-web app using AngularJS, Bootstrap, 
 * App source: clone repo or download source .zip 
 
 2. Download dependencies and create user properties file
-
+```
     cd build
     ant init
-	
+```	
 Should download all dependencies and then report an error wrt a missing properties files. Create this file in ```build``` folder
 
 3. 	Build release
-
+```
     ant release
-	
+```	
 A .zip	file will be created in the ```release``` folder
 	
 ## Deploying a release
