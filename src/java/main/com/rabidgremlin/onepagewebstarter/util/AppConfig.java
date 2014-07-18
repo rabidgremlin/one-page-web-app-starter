@@ -84,7 +84,7 @@ public class AppConfig
   {
 	return configuration.getString(key, "");
   }
-  
+
   public PropertiesConfiguration getPropertiesConfiguration()
   {
 	return configuration;

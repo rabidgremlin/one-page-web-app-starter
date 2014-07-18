@@ -44,11 +44,11 @@ import com.rabidgremlin.onepagewebstarter.util.AppConfig;
 public class TodosResource
 {
 
-  private TodoDoa todoDoa;  
+  private TodoDoa todoDoa;
   private AppConfig appConfig;
 
   @Inject
-  public TodosResource(AppConfig appConfig,TodoDoa todoDoa)
+  public TodosResource(AppConfig appConfig, TodoDoa todoDoa)
   {
 	System.out.println("Created TodosResource. doa:" + todoDoa + " appConfig: " + appConfig);
 	this.todoDoa = todoDoa;

@@ -50,7 +50,7 @@ public class AppServletContextListener extends GuiceServletContextListener
 	{
 
 	  // check that log config property is specified
-	  if (StringUtils.isBlank(appConfig.getPropertiesConfiguration().getString(PROPERTY_LOG_CONFIG)))
+	  if (StringUtils.isBlank(appConfig.getProperty(PROPERTY_LOG_CONFIG)))
 	  {
 		throw new Exception("Property '" + PROPERTY_LOG_CONFIG + "' must be specified in properties file");
 	  }

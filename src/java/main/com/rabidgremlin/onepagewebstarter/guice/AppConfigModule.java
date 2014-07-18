@@ -6,7 +6,7 @@ import com.google.inject.Singleton;
 import com.rabidgremlin.onepagewebstarter.util.AppConfig;
 
 public class AppConfigModule extends AbstractModule
-{  
+{
   private AppConfig appConfig;
 
   public AppConfigModule(AppConfig appConfig)
