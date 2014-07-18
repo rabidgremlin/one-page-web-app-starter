@@ -38,18 +38,21 @@ import com.rabidgremlin.onepagewebstarter.entity.Todo;
 import com.rabidgremlin.onepagewebstarter.rest.dto.TodoCreateDto;
 import com.rabidgremlin.onepagewebstarter.rest.dto.TodoDto;
 import com.rabidgremlin.onepagewebstarter.rest.dto.TodoUpdateDto;
+import com.rabidgremlin.onepagewebstarter.util.AppConfig;
 
 @Path("todos")
 public class TodosResource
 {
 
-  private TodoDoa todoDoa;
+  private TodoDoa todoDoa;  
+  private AppConfig appConfig;
 
   @Inject
-  public TodosResource(TodoDoa todoDoa)
+  public TodosResource(AppConfig appConfig,TodoDoa todoDoa)
   {
-	System.out.println("Created TodosResource..doa:" + todoDoa);
+	System.out.println("Created TodosResource. doa:" + todoDoa + " appConfig: " + appConfig);
 	this.todoDoa = todoDoa;
+	this.appConfig = appConfig;
   }
 
   @Transactional

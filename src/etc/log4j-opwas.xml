@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/">
+    <appender name="CONSOLE" class="org.apache.log4j.ConsoleAppender">        
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="%-5p %d [%t] %c: %m%n"/>
+        </layout>        
+    </appender>
+
+    <appender name="FILE" class="org.apache.log4j.DailyRollingFileAppender">        
+        <param name="File" value="/play/one-page-web-app-starter/tmp/opwas.log"/>        
+        <param name="Append" value="true"/>        
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="%-5p %d [%t] %c: %m%n"/>
+        </layout>        
+    </appender>
+
+	<!-- Set general packages to INFO -->
+	<category name="com">
+       <priority value="INFO"/>
+    </category>   
+	
+	<category name="net">
+       <priority value="INFO"/>
+    </category>
+	
+	<category name="org">
+       <priority value="INFO"/>
+    </category>
+
+	<!-- Shut up some noisy packages -->
+	<category name="org.apache">
+       <priority value="WARN"/>
+    </category>
+			
+	<category name="httpclient">
+       <priority value="INFO"/>
+    </category>
+	
+	<!-- Set our app's log level -->
+	<category name="com.rabidgremlin">
+       <priority value="DEBUG"/>
+    </category>
+
+    <root>
+        <priority value="DEBUG"/>
+        <appender-ref ref="CONSOLE"/>
+		<appender-ref ref="FILE"/>
+    </root>
+
+</log4j:configuration>
